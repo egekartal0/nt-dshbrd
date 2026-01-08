@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Narrative Designer Yol Haritası</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #f9fafb;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        h1 {
+            color: #5b21b6;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 4px solid #5b21b6;
+            padding-bottom: 1rem;
+        }
+        
+        h2 {
+            color: #7c3aed;
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        h3 {
+            color: #6366f1;
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        h4 {
+            color: #4f46e5;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        blockquote {
+            background: #f3f4f6;
+            border-left: 4px solid #7c3aed;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        strong {
+            color: #5b21b6;
+            font-weight: 600;
+        }
+        
+        a {
+            color: #7c3aed;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background: #7c3aed;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        tr:nth-child(even) {
+            background: #f9fafb;
+        }
+        
+        .fase {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0 1rem 0;
+        }
+        
+        .fase h2 {
+            color: white;
+            margin: 0;
+        }
+        
+        .sorun {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        
+        .cozum {
+            background: #d1fae5;
+            border-left: 4px solid #10b981;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        
+        .para {
+            background: #dbeafe;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .warning {
+            background: #fee2e2;
+            border-left: 4px solid #ef4444;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        
+        .checklist {
+            background: #f3f4f6;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .checklist input[type="checkbox"] {
+            margin-right: 0.5rem;
+            width: 18px;
+            height: 18px;
+        }
+        
+        .checklist label {
+            font-size: 1rem;
+        }
+        
+        @media print {
+            body {
+                padding: 0;
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+                padding: 1rem;
+            }
+            .fase {
+                break-inside: avoid;
+            }
+            h2 {
+                break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 NARRATIVE DESIGNER YOL HARİTASI</h1>
+        <p style="font-size: 1.1rem; color: #6b7280; margin-bottom: 2rem;">2-3 Yıllık Profesyonel Kariyer Planı</p>
+        
+        <blockquote>
+            <p><strong>Hedef:</strong> Profesyonel narrative designer olmak ve bundan para kazanabilmek</p>
+            <p><strong>Başlangıç Durumu:</strong> Matematik diploması, güçlü yaratıcılık ve worldbuilding, ama teknik bilgi ve portfolio eksik</p>
+        </blockquote>
+
+        <div class="fase">
+            <h2>📅 FAZ 1: TEMELLERİ OTUR (0-6 Ay)</h2>
+        </div>
+
+        <h3>🎯 Eksiğin: Diyalog Yazımı</h3>
+        <div class="sorun">
+            <strong>Sorun:</strong> Repliklerin yapay duruyor, karakterler robotik konuşuyor
+        </div>
+        <div class="cozum">
+            <strong>Çözüm:</strong>
+            <ol>
+                <li><strong>Oku:</strong> "Dialogue: The Art of Verbal Action" - Robert McKee</li>
+                <li><strong>İzle:</strong> <a href="https://www.youtube.com/c/LessonsfromtheScreenplay" target="_blank">Lessons from the Screenplay</a> - YouTube kanalı</li>
+                <li><strong>Pratik:</strong> Favori oyunlardan (Disco Elysium, Firewatch, Hades) 10 diyalog seç, <strong>neden doğal</strong> diye analiz et</li>
+                <li><strong>Uygula:</strong> Her hafta 1 karakter seç, 500 kelimelik diyalog yaz</li>
+            </ol>
+        </div>
+
+        <h3>🎯 Eksiğin: Interaktif Yazı Mekanikleri</h3>
+        <div class="sorun">
+            <strong>Sorun:</strong> Doğrusal hikaye yazıyorsun, oyun için dallanma/seçim sistemleri bilmiyorsun
+        </div>
+        <div class="cozum">
+            <strong>Çözüm:</strong>
+            <ol>
+                <li><strong>Öğren:</strong> <a href="http://twinery.org/cookbook/" target="_blank">Twine Cookbook</a> - Resmi tutorial</li>
+                <li><strong>Oynat:</strong> Başkalarının Twine oyunlarını oyna - <a href="https://itch.io/games/made-with-twine" target="_blank">itch.io/games/made-with-twine</a></li>
+                <li><strong>Yap:</strong> 3 tane Twine projesi:
+                    <ul>
+                        <li><strong>Proje 1:</strong> Basit seçim ağacı (2 seçenek, 3 sonuç)</li>
+                        <li><strong>Proje 2:</strong> Değişken takipli (karakter sana güveniyor mu/kızgın mı)</li>
+                        <li><strong>Proje 3:</strong> Kendi evreninde 15 dakikalık hikaye</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <h3>💰 İlk Para: Freelance Başlangıç</h3>
+        <div class="cozum">
+            <strong>Ne yapacaksın:</strong>
+            <ul>
+                <li><strong>Upwork/Fiverr'a kayıt ol</strong></li>
+                <li>"Game dialogue writing", "Interactive fiction", "Story editing" hizmetleri aç</li>
+                <li>İlk 2-3 işi <strong>ucuza yap</strong> (portfolio için), sonra fiyatı arttır</li>
+            </ul>
+        </div>
+        <div class="para">
+            💵 <strong>Beklenen Gelir:</strong> 1.000-3.000 TL/ay
+        </div>
+
+        <div class="fase">
+            <h2>📅 FAZ 2: UZMANLAŞ (6-12 Ay)</h2>
+        </div>
+
+        <h3>🎯 Eksiğin: Quest/Görev Tasarımı</h3>
+        <div class="sorun">
+            <strong>Sorun:</strong> "Git şunu al gel" ötesinde görev tasarımı bilmiyorsun
+        </div>
+        <div class="cozum">
+            <strong>Çözüm:</strong>
+            <ol>
+                <li><strong>Oku:</strong> "The Ultimate Guide to Video Game Writing" - Flint Dille & John Zuur Platten</li>
+                <li><strong>İzle:</strong> <a href="https://www.youtube.com/watch?v=otAkP5VjIv8" target="_blank">GMTK - Quest Design</a></li>
+                <li><strong>Analiz et:</strong> Witcher 3/Skyrim/Fallout'tan 10 görev seç:
+                    <ul>
+                        <li>Görevin ana hedefi ne?</li>
+                        <li>Yan seçenekler var mı?</li>
+                        <li>Ödül ve motivasyon ne?</li>
+                        <li>Branching nasıl çalışıyor?</li>
+                    </ul>
+                </li>
+                <li><strong>Yap:</strong> Kendi evreninde 5 farklı görev yaz:
+                    <ul>
+                        <li>Linear quest (basit)</li>
+                        <li>Branching quest (2+ çözüm yolu)</li>
+                        <li>Moral choice quest (iyi/kötü seçim)</li>
+                        <li>Investigation quest (ipucu toplama)</li>
+                        <li>Character-driven quest (ilişki odaklı)</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <h3>🎯 Eksiğin: Profesyonel Format</h3>
+        <div class="sorun">
+            <strong>Sorun:</strong> Yazılarını Word'de yazıyorsun, oyun sektörü başka formatlar kullanıyor
+        </div>
+        <div class="cozum">
+            <strong>Çözüm:</strong>
+            <ol>
+                <li><strong>Öğren:</strong> <a href="https://www.inklestudios.com/ink/" target="_blank">Ink scripting language</a> - Sektörde kullanılıyor</li>
+                <li><strong>Tutorial:</strong> <a href="https://github.com/inkle/ink/blob/master/Documentation/WritingWithInk.md" target="_blank">Ink resmi dokümantasyon</a></li>
+                <li><strong>Yap:</strong> Twine projelerinden birini Ink'e çevir</li>
+                <li><strong>Portfolio'ya ekle:</strong> "Ink ve Twine ile çalışabilirim" yazabilirsin artık</li>
+            </ol>
+        </div>
+
+        <h3>💰 Para Geliştirme</h3>
+        <div class="cozum">
+            <strong>Ne yapacaksın:</strong>
+            <ul>
+                <li>Freelance fiyatları arttır (tecrübe + portfolio büyüdü)</li>
+                <li><strong>Game jam'lere writer olarak katıl:</strong>
+                    <ul>
+                        <li><a href="https://globalgamejam.org/" target="_blank">Global Game Jam</a></li>
+                        <li><a href="https://ldjam.com/" target="_blank">Ludum Dare</a></li>
+                        <li>Discord: Game Dev League - "LF Writer" ara</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="para">
+            💵 <strong>Beklenen Gelir:</strong> 3.000-7.000 TL/ay
+        </div>
+
+        <div class="fase">
+            <h2>📅 FAZ 3: PROFESYONELLEŞ (12-24 Ay)</h2>
+        </div>
+
+        <h3>✅ Portfolio Kontrol Listesi</h3>
+        <div class="checklist">
+            <p><strong>Hazır mı?</strong></p>
+            <div><input type="checkbox" id="check1"><label for="check1"> 3-5 Twine/Ink projesi (itch.io'da yayında)</label></div>
+            <div><input type="checkbox" id="check2"><label for="check2"> Worldbuilding dokümanları (PDF)</label></div>
+            <div><input type="checkbox" id="check3"><label for="check3"> 5-10 quest tasarımı örneği</label></div>
+            <div><input type="checkbox" id="check4"><label for="check4"> Karakter profilleri + diyalog örnekleri</label></div>
+            <div><input type="checkbox" id="check5"><label for="check5"> 1-2 game jam projesi (ekip çalışması kanıtı)</label></div>
+        </div>
+
+        <h3>🎯 İş Başvuruları</h3>
+        <div class="cozum">
+            <p><strong>Siteler:</strong></p>
+            <ul>
+                <li><a href="https://remotegamejobs.com/" target="_blank">Remote Game Jobs</a> - Writer filtrele</li>
+                <li><a href="https://hitmarker.net/jobs" target="_blank">Hitmarker</a> - Narrative designer ara</li>
+                <li><a href="https://www.linkedin.com/jobs/" target="_blank">LinkedIn</a> - "Narrative Designer" "Game Writer"</li>
+            </ul>
+            <p><strong>Türkiye'deki şirketler:</strong></p>
+            <ul>
+                <li>Peak Games, Dream Games (mobil)</li>
+                <li>Indie stüdyolar: <a href="https://www.oyunder.org/" target="_blank">Turkish Game Developers Association</a></li>
+            </ul>
+            <p><strong>Gerçekçi başlangıçlar:</strong></p>
+            <ul>
+                <li>Content Writer (oyun şirketlerinde)</li>
+                <li>QA Tester (narrative feedback veren)</li>
+                <li>Localization Specialist (oyun çevirisi)</li>
+                <li>Junior Game Designer (sonra narrative'e geç)</li>
+            </ul>
+        </div>
+
+        <h3>🎯 Networking</h3>
+        <div class="cozum">
+            <p><strong>Twitter/X:</strong></p>
+            <ul>
+                <li>Takip edilecekler: @emshort, @gamewrit, Türk game dev'ler</li>
+                <li>Haftada 2-3 tweet: oyun analizi, narrative gözlemler, WIP paylaş</li>
+            </ul>
+            <p><strong>Discord toplulukları:</strong></p>
+            <ul>
+                <li>Narrative Gamedev</li>
+                <li>Game Dev Network</li>
+                <li>Türk Game Dev sunucuları</li>
+            </ul>
+            <p><strong>LinkedIn:</strong></p>
+            <ul>
+                <li>Bitirdiğin projeleri paylaş</li>
+                <li>Oyun analizlerini yaz</li>
+                <li>"Looking for narrative design opportunities" ekle</li>
+            </ul>
+        </div>
+
+        <div class="para">
+            💵 <strong>Beklenen Gelir:</strong> İlk iş ($500-1500/ay remote) veya Türkiye'de 20-40k TL/ay
+        </div>
+
+        <div class="fase">
+            <h2>📅 FAZ 4: BÜYÜME (24-36 Ay)</h2>
+        </div>
+
+        <h3>🎯 Derin Uzmanlık Seç (Birini)</h3>
+        <ol>
+            <li><strong>RPG Specialist:</strong> Karakter sistemleri, branching narratives (Baldur's Gate tarzı)</li>
+            <li><strong>Visual Novel Expert:</strong> Romantizm mekanikleri, character routes</li>
+            <li><strong>Procedural Narrative:</strong> Matematikle birleştir, algoritmik hikaye</li>
+            <li><strong>Lore Master:</strong> Worldbuilding, environmental storytelling (Dark Souls tarzı)</li>
+        </ol>
+        <div class="cozum">
+            <p><strong>Hangisini seçersen seç:</strong></p>
+            <ul>
+                <li>O türde 10+ oyun oyna, analiz et</li>
+                <li>O alanda 3 proje yap</li>
+                <li>LinkedIn/portfolio'da "X uzmanı" diye öne çıkar</li>
+            </ul>
+        </div>
+
+        <div class="para">
+            💵 <strong>Beklenen Gelir:</strong> $2.000-4.000/ay remote veya Türkiye'de 50-80k TL/ay
+        </div>
+
+        <h2>🔧 PARALEL GÖREVLER (Tüm Süreç Boyunca)</h2>
+
+        <h3>🌍 İngilizce Problemi Çözümü</h3>
+        <ol>
+            <li>Ana hikayeyi <strong>Türkçe yaz</strong></li>
+            <li>ChatGPT/DeepL/Claude ile çevir</li>
+            <li><a href="https://www.grammarly.com/" target="_blank">Grammarly</a> ile düzelt</li>
+            <li>r/writing ya da Discord'larda native speaker feedback al</li>
+            <li>Zamanla kendin de öğrenirsin</li>
+        </ol>
+
+        <h3>💪 Kilo/Sağlık (Morale Etki Eder)</h3>
+        <ul>
+            <li>Hedef: Haftada 3 gün 30dk yürüyüş</li>
+            <li>Kilo vermekten çok <strong>sürdürülebilir yaşam</strong></li>
+            <li>Moralin iyi olmazsa plan işe yaramaz</li>
+        </ul>
+
+        <h3>🔀 Plan B: Eğer 2 Yılda İş Bulamazsan</h3>
+        <ul>
+            <li>Matematik + yazı = <strong>Technical Writer</strong> (30-50k TL/ay)</li>
+            <li><strong>UX Writer</strong> (arayüz metinleri, iyi para)</li>
+            <li><strong>Data Analyst + Storytelling</strong> (veri + rapor yazımı)</li>
+            <li>KPSS + öğretmenlik (güvenli ama sıkıcı)</li>
+        </ul>
+
+        <h2>📊 ÖZET: 3 YILDA NE OLACAK?</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Zaman</th>
+                    <th>Beceriler</th>
+                    <th>Para</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>6 ay</strong></td>
+                    <td>Twine/Ink, diyalog, ilk freelance işler</td>
+                    <td>1.000-3.000 TL/ay</td>
+                </tr>
+                <tr>
+                    <td><strong>12 ay</strong></td>
+                    <td>Quest tasarımı, jam tecrübesi, güçlü portfolio</td>
+                    <td>3.000-7.000 TL/ay</td>
+                </tr>
+                <tr>
+                    <td><strong>24 ay</strong></td>
+                    <td>İlk narrative işi (junior)</td>
+                    <td>20-40k TL veya $500-1.500/ay</td>
+                </tr>
+                <tr>
+                    <td><strong>36 ay</strong></td>
+                    <td>Mid-level narrative designer</td>
+                    <td>40-80k TL veya $2.000-4.000/ay</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>⚠️ ÖNEMLI UYARILAR</h2>
+        <div class="warning">
+            <ol>
+                <li><strong>Bu plan SADECE takip edersen işe yarar</strong></li>
+                <li>Her "ama", "belki", "sonra" bu süreyi 2 yıl uzatır</li>
+                <li>İlk 6 ay en zor - bitirmek zor</li>
+                <li>"Yetersizim" demeyi bırak, "henüz öğrenmedim" de</li>
+                <li>Mükemmel değil, <strong>bitmiş</strong> olsun her projede</li>
+            </ol>
+        </div>
+
+        <h2>📝 İLK ADIMLAR (Bu Hafta Yapılacaklar)</h2>
+        <div class="checklist">
+            <div><input type="checkbox" id="step1"><label for="step1"> Bu planı oku, not al</label></div>
+            <div><input type="checkbox" id="step2"><label for="step2"> Twine'ı indir, 10 dakikalık tutorial izle</label></div>
+            <div><input type="checkbox" id="step3"><label for="step3"> Makarnia hikayesinin ilk 500 kelimesini yaz</label></div>
+            <div><input type="checkbox" id="step4"><label for="step4"> Upwork/Fiverr'a kayıt ol (henüz ilan açma, sadece incele)</label></div>
+            <div><input type="checkbox" id="step5"><label for="step5"> LinkedIn'i güncelle: "Aspiring Narrative Designer" ekle</label></div>
+        </div>
+
+        <blockquote style="margin-top: 3rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+            <p style="font-size: 1.2rem;"><strong>Son Söz:</strong> Sen zaten yazıyorsun. Sadece sistematik hale getirmen ve bitirme alışkanlığı kazanman lazım. Bu plan o yolu gösteriyor. Şimdi sadece başla.</p>
+        </blockquote>
+
+        <p style="text-align: center; margin-top: 2rem; color: #6b7280; font-size: 0.9rem;">
+            <em>Son güncelleme: 8 Ocak 2025 • Senin için özel hazırlanmış yol haritası</em>
+        </p>
+    </div>
+</body>
+</html>

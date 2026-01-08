@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Narrative Designer Yolculuğum</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #7c3aed;
+            --primary-dark: #5b21b6;
+            --secondary: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg: #0f172a;
+            --bg-light: #1e293b;
+            --text: #e2e8f0;
+            --text-dim: #94a3b8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(124, 58, 237, 0.3);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background: var(--bg-light);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .tab:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .tab.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .card h3 {
+            color: var(--secondary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .fase-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            background: var(--bg);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: var(--bg);
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .checklist-item:hover {
+            background: rgba(124, 58, 237, 0.1);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 1rem;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .checklist-item.completed {
+            opacity: 0.6;
+        }
+
+        .checklist-item.completed label {
+            text-decoration: line-through;
+        }
+
+        .book-card {
+            background: var(--bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
+            transition: all 0.2s;
+        }
+
+        .book-card:hover {
+            transform: translateX(5px);
+            border-left-color: var(--secondary);
+        }
+
+        .book-card.read {
+            opacity: 0.6;
+            border-left-color: var(--success);
+        }
+
+        .priority-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .priority-1 {
+            background: var(--danger);
+        }
+
+        .priority-2 {
+            background: var(--warning);
+        }
+
+        .priority-3 {
+            background: var(--secondary);
+        }
+
+        .priority-4 {
+            background: var(--text-dim);
+        }
+
+        .term-card {
+            background: var(--bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .term-card h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid rgba(124, 58, 237, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .link-card {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--bg);
+            border-radius: 8px;
+            margin: 0.5rem;
+            text-decoration: none;
+            color: var(--text);
+            border: 1px solid var(--primary);
+            transition: all 0.2s;
+        }
+
+        .link-card:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+        }
+
+        .info-box {
+            background: rgba(6, 182, 212, 0.1);
+            border-left: 4px solid var(--secondary);
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .tabs {
+                flex-wrap: nowrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 Narrative Designer Yolculuğum</h1>
+            <p>Kendi kariyerini takip et, ilerlemeyi kaydet!</p>
+        </header>
+
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('roadmap')">📍 Yol Haritası</div>
+            <div class="tab" onclick="switchTab('books')">📚 Kitaplar</div>
+            <div class="tab" onclick="switchTab('terms')">📖 Terimler</div>
+            <div class="tab" onclick="switchTab('portfolio')">💼 Portfolio</div>
+            <div class="tab" onclick="switchTab('resources')">🔗 Kaynaklar</div>
+        </div>
+
+        <!-- YOL HARİTASI -->
+        <div id="roadmap" class="tab-content active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalProgress">0%</div>
+                    <div class="stat-label">Toplam İlerleme</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="completedTasks">0</div>
+                    <div class="stat-label">Tamamlanan Görevler</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="booksRead">0</div>
+                    <div class="stat-label">Okunan Kitaplar</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="fase-badge">📅 FAZ 1: Temelleri Otur (0-6 Ay)</span>
+                <h2>Başlangıç Aşaması</h2>
+
+                <h3>🎯 Diyalog Yazımı</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-1" onchange="saveProgress()">
+                    <label for="task-1">"Dialogue: The Art of Verbal Action" kitabını oku</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-2" onchange="saveProgress()">
+                    <label for="task-2">Lessons from the Screenplay kanalını izle (5 video)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-3" onchange="saveProgress()">
+                    <label for="task-3">Favori oyunlardan 10 diyalog analizi yap</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-4" onchange="saveProgress()">
+                    <label for="task-4">4 hafta boyunca haftada 1 diyalog yaz (500 kelime)</label>
+                </div>
+
+                <h3>🎯 Interaktif Yazı Mekanikleri</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-5" onchange="saveProgress()">
+                    <label for="task-5">Twine Cookbook tutorial'ını tamamla</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-6" onchange="saveProgress()">
+                    <label for="task-6">itch.io'da 10 Twine oyunu oyna ve analiz et</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-7" onchange="saveProgress()">
+                    <label for="task-7">Proje 1: Basit seçim ağacı yap (2 seçenek, 3 sonuç)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-8" onchange="saveProgress()">
+                    <label for="task-8">Proje 2: Değişken takipli hikaye yap</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-9" onchange="saveProgress()">
+                    <label for="task-9">Proje 3: Kendi evreninde 15 dakikalık hikaye yap</label>
+                </div>
+
+                <h3>💰 İlk Para: Freelance</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-10" onchange="saveProgress()">
+                    <label for="task-10">Upwork ve Fiverr'a kayıt ol</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-11" onchange="saveProgress()">
+                    <label for="task-11">Profil oluştur, hizmet ilanı yaz</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-12" onchange="saveProgress()">
+                    <label for="task-12">İlk freelance işini al</label>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="fase-badge">📅 FAZ 2: Uzmanlaş (6-12 Ay)</span>
+                <h2>Gelişim Aşaması</h2>
+
+                <h3>🎯 Quest/Görev Tasarımı</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-13" onchange="saveProgress()">
+                    <label for="task-13">"The Ultimate Guide to Video Game Writing" oku</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-14" onchange="saveProgress()">
+                    <label for="task-14">GMTK Quest Design videolarını izle</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-15" onchange="saveProgress()">
+                    <label for="task-15">Witcher 3/Skyrim'den 10 görev analizi yap</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-16" onchange="saveProgress()">
+                    <label for="task-16">5 farklı tip görev yaz (linear, branching, moral, investigation,
+                        character-driven)</label>
+                </div>
+
+                <h3>🎯 Profesyonel Format</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-17" onchange="saveProgress()">
+                    <label for="task-17">Ink scripting language öğren</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-18" onchange="saveProgress()">
+                    <label for="task-18">Bir Twine projesini Ink'e çevir</label>
+                </div>
+
+                <h3>💰 Para Geliştirme</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-19" onchange="saveProgress()">
+                    <label for="task-19">İlk Game Jam'e katıl (writer olarak)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-20" onchange="saveProgress()">
+                    <label for="task-20">Freelance fiyatlarını arttır</label>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="fase-badge">📅 FAZ 3: Profesyonelleş (12-24 Ay)</span>
+                <h2>Profesyonel Aşama</h2>
+
+                <h3>✅ Portfolio Hazırlığı</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-21" onchange="saveProgress()">
+                    <label for="task-21">3-5 Twine/Ink projesi tamamla ve itch.io'da yayınla</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-22" onchange="saveProgress()">
+                    <label for="task-22">Worldbuilding dokümanlarını PDF'le</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-23" onchange="saveProgress()">
+                    <label for="task-23">Portfolio sitesi oluştur (Carrd.co veya GitHub Pages)</label>
+                </div>
+
+                <h3>🎯 Networking</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-24" onchange="saveProgress()">
+                    <label for="task-24">Twitter/X hesabı oluştur, game dev'leri takip et</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-25" onchange="saveProgress()">
+                    <label for="task-25">Discord toplulıklarına katıl</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-26" onchange="saveProgress()">
+                    <label for="task-26">LinkedIn'i güncelle: "Aspiring Narrative Designer"</label>
+                </div>
+
+                <h3>💼 İş Başvuruları</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-27" onchange="saveProgress()">
+                    <label for="task-27">İlk 10 başvuruyu yap</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task-28" onchange="saveProgress()">
+                    <label for="task-28">İlk narrative/writing işini al!</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- KİTAPLAR -->
+        <div id="books" class="tab-content">
+            <div class="card">
+                <h2>📚 Kitap Okuma Sırası</h2>
+                <p style="margin-bottom: 1.5rem;">Öncelik sırasına göre okuman gereken kitaplar. Okuduğunca işaretle!
+                </p>
+
+                <div class="info-box" style="margin-bottom: 1.5rem;">
+                    <strong>📖 Okuma Planı:</strong> İlk 5 kitabı sırayla oku. Ayda 1 kitap = Mayıs'a kadar bitir!
+                </div>
+
+                <h3>🔥 Öncelik 1: HEMEN OKU (Narrative Designer için ŞART)</h3>
+                <div class="book-card">
+                    <input type="checkbox" id="book-1" onchange="saveProgress()">
+                    <label for="book-1">
+                        <strong>1. The Ultimate Guide to Video Game Writing</strong>
+                        <span class="priority-badge priority-1">P1</span>
+                        <p style="margin-top: 0.5rem; color: var(--text-dim);">TAM senin işin bu! Oyun yazarlığının
+                            A'sından Z'sine. Quest tasarımı, diyalog, branching - hepsi var.</p>
+                    </label>
+                </div>
+
+                <div class="book-card">
+                    <input type="checkbox" id="book-2" onchange="saveProgress()">
+                    <label for="book-2">
+                        <strong>2. Stephen King - On Writing</strong>
+                        <span class="priority-badge priority-1">P1</span>
+                        <p style="margin-top: 0.5rem; color: var(--text-dim);">En iyi yazarlık kitabı. Diyalog,
+                            karakter, "kill your darlings" - hepsi burada. Kısa, eğlenceli, pratik.</p>
+                    </label>
+                </div>
+
+                <div class="book-card">
+                    <input type="checkbox" id="book-3" onchange="saveProgress()">
+                    <label for="book-3">
+                        <strong>3. Robert McKee - Story</strong>
+                        <span class="priority-badge priority-1">P1</span>
+                        <p style="margin-top: 0.5rem; color: var(--text-dim);">Hikaye yapısının İncil'i. Ağır ama ÇOK
+                            değerli. Karakter motivasyonu, conflict, story arc - bunları BİLMEK zorundasın.</p>
+                    </label>
+                </div>
+
+                <h3>📚 Öncelik 2: Hemen Sonra Oku (İşini Geliştirir)</h3>
+                <div class="book-card">
+                    <input type="checkbox" id="book-4" onchange="saveProgress()">
+                    <label for="book-4">
+                        <strong>4. Jesse Schell - The Art of Game Design</strong>
+                        <span class="priority-badge priority-2">P2</span>
+                        <p style="margin-top: 0.5rem; color: var(--text-dim);">Oyun tasarımını anlamadan narrative
+                            design yapamazsın. Oyun MEKANİKLERİyle hikayeyi nasıl birleştirirsin öğrenirsin.</p>
+                    </label>
+                </div>
+
+                <div class="book-card">
+                    <input type="checkbox" id="book-5" onchange="saveProgress()">
+                    <label for="book-5">
+                        <strong>5. Blake Snyder - Save the Cat</strong>
+                        <span class="priority-badge priority-2">P2</span>
+                        <p style="margin-top: 0.5rem; color: var(--text-dim);">Senaryo yapısı, beat sheet. Oyun
+                            hikayeleri de aynı prensipleri kullanır. Kısa, kolay okunur.</p>
+                    </label>
+                </div>
+
+                <div class="book-card">
+                    <input type="checkbox" id="book-6" onchange="saveProgress()">
+                    <label for="book-6">
+                        <strong>6. Christopher Vogler - The Writer's Journey</strong>
+                        <span class="priority-badge priority-2">P2</span>
+                        <p style="margin-top: 0.5rem; color: var(--text-dim);">Hero's Journey, karakter arketipleri.
+                            RPG/Adventure oyunları için ŞART.</p>
+                    </label>
+                </div>
+
+                <h3>💡 Öncelik 3: Motivasyon Lazımsa Oku</h3>
+                <div class="book-card">
+                    <input type="checkbox" id="book-7" onchange="saveProgress()">
+                    <label for="book-7">
+                        <strong>7. Elizabeth Gilbert - Big Magic</strong>
+                        <span class="priority-badge priority-3">P3</span>
+                        <p style="margin-top: 0.5rem; color: var(--text-dim);">"Yetersizim" hissine ÇARE. Yaratıcılık
+                            hakkında, korkuyu yenmek hakkında. Moralin bozuksa oku.</p>
+                    </label>
+                </div>
+
+                <div class="book-card">
+                    <input type="checkbox" id="book-8" onchange="saveProgress()">
+                    <label for="book-8">
+                        <strong>8. Austin Kleon - Steal Like an Artist</strong>
+                        <span class="priority-badge priority-3">P3</span>
+                        <p style="margin-top: 0.5rem; color: var(--text-dim);">Kısa, eğlenceli, "mükemmel olma, başla"
+                            der. Hızlı okursun, motivasyon boost verir.</p>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- TERİMLER -->
+        <div id="terms" class="tab-content">
+            <div class="card">
+                <h2>📖 Narrative Design Terimleri</h2>
+
+                <div class="term-card">
+                    <h4>Narrative Designer</h4>
+                    <p>Oyunlarda hikaye, karakter, diyalog ve quest tasarımından sorumlu kişi. Sadece yazar değil, oyun
+                        mekaniğiyle hikayeyi birleştiren tasarımcı.</p>
+                </div>
+
+                <div class="term-card">
+                    <h4>Branching Narrative</h4>
+                    <p>Oyuncunun seçimlerine göre değişen, dallanan hikaye yapısı. Örnek: "A seçeneğini seçersen X olur,
+                        B'yi seçersen Y olur."</p>
+                </div>
+
+                <div class="term-card">
+                    <h4>Interactive Fiction</h4>
+                    <p>Metin tabanlı, seçim odaklı hikayeler. Twine ile yapılır. Kod gerektirmez, sadece yazı ve
+                        dallanma.</p>
+                </div>
+
+                <div class="term-card">
+                    <h4>Twine</h4>
+                    <p>Ücretsiz, kolay kullanımlı interactive fiction aracı. Kod bilmeden seçim bazlı hikayeler
+                        yazabilirsin. Portfolio için ideal.</p>
+                </div>
+
+                <div class="term-card">
+                    <h4>Ink</h4>
+                    <p>Profesyonel narrative scripting dili. 80 Days, Heaven's Vault gibi oyunlarda kullanılır. Sektör
+                        standardı.</p>
+                </div>
+
+                <div class="term-card">
+                    <h4>Quest Design</h4>
+                    <p>Oyunda görev tasarımı. Linear (doğrusal), branching (dallanan), investigation (araştırma) gibi
+                        türleri var.</p>
+                </div>
+
+                <div class="term-card">
+                    <h4>Game Jam</h4>
+                    <p>Kısa sürede (genellikle 48-72 saat) oyun yapma etkinliği. Ekiple katılırsın, writer olarak görev
+                        alabilirsin. Portfolio + networking için harika.</p>
+                </div>
+
+                <div class="term-card">
+                    <h4>Technical Writer</h4>
+                    <p>Teknik konuları sade dille anlatan yazar. Kullanım kılavuzları, API dokümantasyonu, teknik
+                        raporlar yazar. Plan B olarak iyi seçenek.</p>
+                </div>
+
+                <div class="term-card">
+                    <h4>Worldbuilding</h4>
+                    <p>Oyunun evrenini, tarihini, kültürünü, kurallarını oluşturma. Senin güçlü yanın! (Kremonte,
+                        Limonya vs.)</p>
+                </div>
+
+                <div class="term-card">
+                    <h4>Environmental Storytelling</h4>
+                    <p>Hikayeyi diyalog/metin olmadan çevreyle anlatma. Örnek: Dark Souls'da item açıklamaları, sahne
+                        düzeni.</p>
+                </div>
+
+                <div class="term-card">
+                    <h4>Lore</h4>
+                    <p>Oyunun arka plan hikayesi, mitolojisi, tarihi. Derinlemesine detaylar içerir.</p>
+                </div>
+
+                <div class="term-card">
+                    <h4>Beat Sheet</h4>
+                    <p>Hikayenin anahtar anlarını gösteren şablon. Save the Cat metodunda kullanılır. Her sahnede "ne
+                        olması gerekir" gösterir.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PORTFOLIO -->
+        <div id="portfolio" class="tab-content">
+            <div class="card">
+                <h2>💼 Portfolio Takibi</h2>
+                <p style="margin-bottom: 1.5rem;">Portfolio'nu oluşturmak için yapman gereken projeler. Hepsini tamamla!
+                </p>
+
+                <h3>🎮 Twine Projeleri</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="port-1" onchange="saveProgress()">
+                    <label for="port-1">Proje 1: Basit seçim ağacı (10 dakika oynanış)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="port-2" onchange="saveProgress()">
+                    <label for="port-2">Proje 2: Değişken takipli hikaye (15 dakika)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="port-3" onchange="saveProgress()">
+                    <label for="port-3">Proje 3: Kremonte evreninde hikaye (20 dakika)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="port-4" onchange="saveProgress()">
+                    <label for="port-4">Proje 4: Limonya evreninde hikaye (20 dakika)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="port-5" onchange="saveProgress()">
+                    <label for="port-5">Proje 5: Serbest konu (deneysel)</label>
+                </div>
+
+                <h3>📝 Yazılı Hikayeler</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="port-6" onchange="saveProgress()">
+                    <label for="port-6">Makarnia hikayesini bitir</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="port-7" onchange="saveProgress()">
+                    <label for="port-7">Limonya hikayesini bitir</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="port-8" onchange="saveProgress()">
+                    <label for="port-8">Diğer 4 ülkede birer hikaye yaz</label>
+                </div>
+
+                <h3>🎯 Quest Tasarımları</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="port-9" onchange="saveProgress()">
+                    <label for="port-9">5 farklı tipte quest tasarla (yazılı döküman)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="port-10" onchange="saveProgress()">
+                    <label for="port-10">Bir quest'i Twine'da interaktif hale getir</label>
+                </div>
+
+                <h3>🌍 Worldbuilding Dökümanları</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="port-11" onchange="saveProgress()">
+                    <label for="port-11">6 ülkenin kültür/sosyal yapı PDF'i</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="port-12" onchange="saveProgress()">
+                    <label for="port-12">Evren haritası ve tarihçe</label>
+                </div>
+
+                <h3>🎪 Game Jam Projeleri</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="port-13" onchange="saveProgress()">
+                    <label for="port-13">İlk Game Jam'de writer olarak çalış</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="port-14" onchange="saveProgress()">
+                    <label for="port-14">İkinci Game Jam (farklı ekip)</label>
+                </div>
+
+                <h3>🌐 Portfolio Sitesi</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="port-15" onchange="saveProgress()">
+                    <label for="port-15">Portfolio sitesini oluştur (Carrd.co/GitHub Pages)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="port-16" onchange="saveProgress()">
+                    <label for="port-16">Tüm projeleri siteye ekle</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- KAYNAKLAR -->
+        <div id="resources" class="tab-content">
+            <div class="card">
+                <h2>🔗 Faydalı Kaynaklar</h2>
+
+                <h3>🎓 Öğrenme</h3>
+                <a href="http://twinery.org/cookbook/" target="_blank" class="link-card">📘 Twine Cookbook</a>
+                <a href="https://www.inklestudios.com/ink/" target="_blank" class="link-card">📘 Ink Scripting</a>
+                <a href="https://www.youtube.com/c/LessonsfromtheScreenplay" target="_blank" class="link-card">🎬
+                    Lessons from the Screenplay</a>
+                <a href="https://www.youtube.com/watch?v=otAkP5VjIv8" target="_blank" class="link-card">🎬 GMTK - Quest
+                    Design</a>
+
+                <h3>🎮 Yayınlama</h3>
+                <a href="https://itch.io" target="_blank" class="link-card">🎮 itch.io</a>
+                <a href="https://carrd.co" target="_blank" class="link-card">🌐 Carrd (Portfolio)</a>
+
+                <h3>💼 İş Bulma</h3>
+                <a href="https://remotegamejobs.com" target="_blank" class="link-card">💼 Remote Game Jobs</a>
+                <a href="https://hitmarker.net/jobs" target="_blank" class="link-card">💼 Hitmarker</a>
+                <a href="https://www.linkedin.com/jobs" target="_blank" class="link-card">💼 LinkedIn Jobs</a>
+
+                <h3>💰 Freelance</h3>
+                <a href="https://upwork.com" target="_blank" class="link-card">💰 Upwork</a>
+                <a href="https://fiverr.com" target="_blank" class="link-card">💰 Fiverr</a>
+
+                <h3>🎪 Game Jams</h3>
+                <a href="https://globalgamejam.org" target="_blank" class="link-card">🎪 Global Game Jam</a>
+                <a href="https://ldjam.com" target="_blank" class="link-card">🎪 Ludum Dare</a>
+
+                <h3>👥 Topluluklar</h3>
+                <a href="https://discord.gg/gamedev" target="_blank" class="link-card">💬 Game Dev Discord</a>
+                <a href="https://www.oyunder.org" target="_blank" class="link-card">🇹🇷 OYUNDER (Türk Game Dev)</a>
+            </div>
+
+            <div class="card">
+                <h2>⚠️ Önemli Hatırlatmalar</h2>
+                <div class="warning-box">
+                    <strong>1. Bu plan SADECE takip edersen işe yarar!</strong><br>
+                    Her "ama", "belki", "sonra" bu süreyi 2 yıl uzatır.
+                </div>
+                <div class="warning-box">
+                    <strong>2. İlk 6 ay en zor - bitirmek zor.</strong><br>
+                    Ama ilk projeyi bitirince momentum gelir.
+                </div>
+                <div class="info-box">
+                    <strong>3. "Yetersizim" demeyi bırak, "henüz öğrenmedim" de.</strong><br>
+                    Herkes kötü başlar. Fark devam edenlerde.
+                </div>
+                <div class="info-box">
+                    <strong>4. Mükemmel değil, BİTMİŞ olsun her projede!</strong><br>
+                    10 bitmiş bok proje > 1 "mükemmel" ama yarım proje.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab değiştirme
+        function switchTab(tabName) {
+            // Tüm tabları ve içerikleri gizle
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+            // Seçilen tabı göster
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // Progress kaydetme
+        function saveProgress() {
+            // Tüm checkbox'ları al
+            const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+            const progress = {};
+
+            allCheckboxes.forEach(checkbox => {
+                progress[checkbox.id] = checkbox.checked;
+            });
+
+            // LocalStorage'a kaydet
+            localStorage.setItem('narrativeProgress', JSON.stringify(progress));
+
+            // Completed styling
+            allCheckboxes.forEach(checkbox => {
+                const parent = checkbox.closest('.checklist-item, .book-card');
+                if (parent) {
+                    if (checkbox.checked) {
+                        parent.classList.add('completed');
+                    } else {
+                        parent.classList.remove('completed');
+                    }
+                }
+            });
+
+            // İstatistikleri güncelle
+            updateStats();
+        }
+
+        // Progress yükleme
+        function loadProgress() {
+            const saved = localStorage.getItem('narrativeProgress');
+            if (saved) {
+                const progress = JSON.parse(saved);
+                Object.keys(progress).forEach(id => {
+                    const checkbox = document.getElementById(id);
+                    if (checkbox) {
+                        checkbox.checked = progress[id];
+                        const parent = checkbox.closest('.checklist-item, .book-card');
+                        if (parent && progress[id]) {
+                            parent.classList.add('completed');
+                        }
+                    }
+                });
+            }
+            updateStats();
+        }
+
+        // İstatistikleri güncelle
+        function updateStats() {
+            // Görev sayısı
+            const taskCheckboxes = document.querySelectorAll('[id^="task-"]');
+            const completedTasks = Array.from(taskCheckboxes).filter(cb => cb.checked).length;
+            const totalTasks = taskCheckboxes.length;
+            const taskProgress = Math.round((completedTasks / totalTasks) * 100);
+
+            // Kitap sayısı
+            const bookCheckboxes = document.querySelectorAll('[id^="book-"]');
+            const completedBooks = Array.from(bookCheckboxes).filter(cb => cb.checked).length;
+
+            // Toplam ilerleme
+            const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+            const allCompleted = Array.from(allCheckboxes).filter(cb => cb.checked).length;
+            const allTotal = allCheckboxes.length;
+            const totalProgress = Math.round((allCompleted / allTotal) * 100);
+
+            // Güncelle
+            document.getElementById('totalProgress').textContent = totalProgress + '%';
+            document.getElementById('completedTasks').textContent = completedTasks;
+            document.getElementById('booksRead').textContent = completedBooks;
+        }
+
+        // Reset butonu (debug için)
+        function resetProgress() {
+            if (confirm('Tüm ilerlemeyi sıfırlamak istediğinden emin misin?')) {
+                localStorage.removeItem('narrativeProgress');
+                location.reload();
+            }
+        }
+
+        // Sayfa yüklendiğinde
+        window.addEventListener('load', loadProgress);
+    </script>
+</body>
+
+</html>
